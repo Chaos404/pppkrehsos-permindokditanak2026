@@ -89,6 +89,32 @@ setTimeout(()=>{
     },400);
   }
 },18000);
+
+  (() => {
+    'use strict';
+  
+    // Blokir klik kanan
+    document.addEventListener('contextmenu', function (e) {
+      e.preventDefault();
+    });
+  
+    // Blokir shortcut umum
+    document.addEventListener('keydown', function (e) {
+      const key = (e.key || '').toLowerCase();
+      const ctrlOrCmd = e.ctrlKey || e.metaKey;
+  
+      const blocked =
+        e.key === 'F12' ||
+        (ctrlOrCmd && e.shiftKey &&
+          ['i', 'j', 'c', 'k'].includes(key)) ||
+        (ctrlOrCmd && ['u', 's'].includes(key));
+  
+      if (blocked) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  })();
 </script>
 </body>
 </html>
